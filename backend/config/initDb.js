@@ -2,11 +2,11 @@ const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 async function initializeDatabase() {
-  const host = process.env.DB_HOST || '127.0.0.1';
-  const user = process.env.DB_USER || 'root';
-  const password = process.env.DB_PASS || '';
-  const database = process.env.DB_NAME || 'kuwenta_db';
-  const port = parseInt(process.env.DB_PORT || '3306', 10);
+  const host = process.env.DB_HOST || process.env.MYSQLHOST || '127.0.0.1';
+  const user = process.env.DB_USER || process.env.MYSQLUSER || 'root';
+  const password = process.env.DB_PASS !== undefined ? process.env.DB_PASS : (process.env.MYSQLPASSWORD || '');
+  const database = process.env.DB_NAME || process.env.MYSQLDATABASE || 'kuwenta_db';
+  const port = parseInt(process.env.DB_PORT || process.env.MYSQLPORT || '3306', 10);
 
   console.log('Starting database initialization...');
 
